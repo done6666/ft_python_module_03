@@ -1,9 +1,3 @@
-"""Exercise 3: Achievement Hunter.
-
-Authorized: len(), print(), import random, random.*, set(), set.union(),
-set.intersection(), set.difference()
-"""
-
 import random
 
 
