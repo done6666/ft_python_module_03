@@ -41,6 +41,7 @@ def get_distance(
 
 def main() -> None:
     print("=== Game Coordinate System ===")
+    print()
     print("Get a first set of coordinates")
     first_position: tuple[float, float, float] = get_player_pos()
     print(f"Got a first tuple: {first_position}")
@@ -52,6 +53,7 @@ def main() -> None:
     print(
         f"Distance to center: {round(get_distance(center, first_position), 4)}"
         )
+    print()
     print("Get a second set of coordinates")
     second: tuple[float, float, float] = get_player_pos()
     between: float = round(get_distance(first_position, second), 4)
