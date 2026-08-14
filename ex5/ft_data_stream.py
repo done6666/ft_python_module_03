@@ -1,25 +1,47 @@
-"""Exercise 5: Stream Wizard.
-
-Authorized: next(), range(), len(), print(), import typing,
-typing.Generator, import random, random.*
-"""
-
 import random
 import typing
 
+PLAYERS: list[str] = ["alice", "bob", "charlie", "dylan"]
+ACTIONS: list[str] = [
+    "run",
+    "eat",
+    "sleep",
+    "grab",
+    "move",
+    "climb",
+    "swim",
+    "use",
+    "release",
+]
+EVENT_COUNT: int = 1000
+SAMPLE_SIZE: int = 10
+
 
 def gen_event() -> typing.Generator[tuple[str, str], None, None]:
-    """Yield endless (player, action) events picked at random."""
+    while True:
+        yield (random.choice(PLAYERS), random.choice(ACTIONS))
 
 
 def consume_event(
     events: list[tuple[str, str]],
 ) -> typing.Generator[tuple[str, str], None, None]:
-    """Yield and remove a random event from the list until it is empty."""
+    while len(events) > 0:
+        yield events.pop(random.randrange(len(events)))
 
 
 def main() -> None:
-    """Produce a stream of events, then consume a list of them."""
+    print("=== Game Data Stream Processor ===")
+    stream: typing.Generator[tuple[str, str], None, None] = gen_event()
+    for count in range(EVENT_COUNT):
+        name, action = next(stream)
+        print(f"Event {count}: Player {name} did action {action}")
+    events: list[tuple[str, str]] = []
+    for _ in range(SAMPLE_SIZE):
+        events.append(next(stream))
+    print(f"Built list of {len(events)} events: {events}")
+    for event in consume_event(events):
+        print(f"Got event from list: {event}")
+        print(f"Remains in list: {events}")
 
 
 if __name__ == "__main__":
