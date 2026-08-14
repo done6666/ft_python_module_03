@@ -32,11 +32,14 @@ def get_distance(
     start: tuple[float, float, float],
     end: tuple[float, float, float],
 ) -> float:
-    return math.sqrt(
-        (end[0] - start[0]) ** 2
-        + (end[1] - start[1]) ** 2
-        + (end[2] - start[2]) ** 2
-    )
+    try:
+        return math.sqrt(
+            (end[0] - start[0]) ** 2
+            + (end[1] - start[1]) ** 2
+            + (end[2] - start[2]) ** 2
+        )
+    except OverflowError:
+        return float("inf")
 
 
 def main() -> None:
@@ -48,11 +51,11 @@ def main() -> None:
     print(
         f"It includes: X={first_position[0]}, Y={first_position[1]}"
         f", Z={first_position[2]}"
-        )
+    )
     center: tuple[float, float, float] = (0.0, 0.0, 0.0)
     print(
         f"Distance to center: {round(get_distance(center, first_position), 4)}"
-        )
+    )
     print()
     print("Get a second set of coordinates")
     second: tuple[float, float, float] = get_player_pos()

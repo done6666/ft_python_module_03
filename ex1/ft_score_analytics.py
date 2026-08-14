@@ -14,7 +14,7 @@ def main() -> None:
         print(
             "No scores provided. Usage: python3 ft_score_analytics.py"
             " <score1> <score2> ..."
-            )
+        )
         return
     total: int = sum(scores)
     high: int = max(scores)

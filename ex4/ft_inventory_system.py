@@ -30,9 +30,10 @@ def main() -> None:
     print(f"Got inventory: {items}")
     print(f"Item list: {list(items.keys())}")
     print(f"Total quantity of the {item_length} items: {total}")
-    for item in items:
-        percentage: float = round(items[item] / total * 100, 1)
-        print(f"Item {item} represents {percentage}%")
+    if total > 0:
+        for item in items:
+            percentage: float = round(items[item] / total * 100, 1)
+            print(f"Item {item} represents {percentage}%")
     if item_length > 0:
         most_abundant: str = list(items.keys())[0]
         least_abundant: str = most_abundant
