@@ -13,8 +13,6 @@ ACTIONS: list[str] = [
     "use",
     "release",
 ]
-EVENT_COUNT: int = 1000
-SAMPLE_SIZE: int = 10
 
 
 def gen_event() -> typing.Generator[tuple[str, str], None, None]:
@@ -32,11 +30,11 @@ def consume_event(
 def main() -> None:
     print("=== Game Data Stream Processor ===")
     stream: typing.Generator[tuple[str, str], None, None] = gen_event()
-    for count in range(EVENT_COUNT):
+    for count in range(1000):
         name, action = next(stream)
         print(f"Event {count}: Player {name} did action {action}")
     events: list[tuple[str, str]] = []
-    for _ in range(SAMPLE_SIZE):
+    for garbage in range(10):
         events.append(next(stream))
     print(f"Built list of {len(events)} events: {events}")
     for event in consume_event(events):
